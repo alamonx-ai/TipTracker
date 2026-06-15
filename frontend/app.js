@@ -1,4 +1,4 @@
-const API_URL = "http://127.0.0.1:8000";
+const API_URL = "https://tiptracker-api.onrender.com";
 let isLoginMode = true; // Permet de savoir si on est en mode connexion ou inscription
 let currentDisplayedDate = new Date(); // Garde une trace du mois affiché à l'écran
 let allShifts = []; // Stockera tous les shifts récupérés du backend
