@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Tip Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <section id="page-auth" class="min-h-screen flex items-center justify-center">
+        <div class="bg-white p-8 rounded shadow-md w-96">
+            <h2 id="auth-title" class="text-2xl font-bold mb-4">Connexion</h2>
+            
+            <input type="email" id="login-email" placeholder="Email" class="border p-2 w-full mb-3">
+            <input type="password" id="login-pass" placeholder="Mot de passe" class="border p-2 w-full mb-4">
+            
+            <button id="btn-auth-submit" onclick="handleAuthSubmit()" class="bg-blue-500 text-white p-2 w-full rounded">Se connecter</button>
+            
+            <p class="text-sm text-center mt-4 text-gray-600">
+                <span id="auth-toggle-text">Pas encore de compte ?</span>
+                <button onclick="toggleAuthMode()" id="btn-auth-toggle" class="text-blue-500 underline focus:outline-none">Créer un compte</button>
+            </p>
+        </div>
+    </section>
+
+    <section id="page-dashboard" class="hidden max-w-md mx-auto p-4">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl font-bold text-gray-800">Mon Tableau de Bord</h2>
+            <button onclick="logout()" class="bg-red-500 text-white text-sm px-3 py-1 rounded hover:bg-red-600 transition">Déconnexion</button>
+        </div>
+
+        <div class="bg-white p-4 rounded shadow mb-4">
+            <h3 class="text-xl font-bold">Moyenne : <span id="stat-avg">0</span>$/h</h3>
+        </div>
+
+        <div id="daily-shifts-container" class="hidden bg-white p-4 rounded shadow mb-4 border-l-4 border-blue-500">
+            <h4 class="font-bold text-sm text-gray-700 mb-2">Quarts enregistrés pour cette journée :</h4>
+            <ul id="daily-shifts-list" class="divide-y divide-gray-100">
+                </ul>
+        </div>
+
+        <form id="shift-form" class="bg-white p-4 rounded shadow mb-4" onsubmit="saveShift(event)">
+            <h3 id="form-title" class="font-bold mb-2 text-gray-700">Ajouter un quart</h3>
+            
+            <label class="block text-xs text-gray-400 mb-1">Date du quart de travail :</label>
+            <input type="date" id="shift-date" class="border p-2 w-full mb-2 bg-gray-50 font-semibold" required>
+            
+            <input type="number" id="hours" placeholder="Heures travaillées" class="border p-2 w-full mb-2" required step="0.1">
+            <input type="number" id="tips" placeholder="Pourboires ($)" class="border p-2 w-full mb-2" required step="0.01">
+            <input type="number" id="wage" placeholder="Salaire horaire ($)" class="border p-2 w-full mb-2" required step="0.01">
+            
+            <div class="flex space-x-2">
+                <button type="submit" id="btn-submit-shift" class="flex-1 bg-green-500 text-white p-2 rounded font-bold hover:bg-green-600 transition">
+                    Enregistrer
+                </button>
+                <button type="button" id="btn-delete-shift" onclick="deleteCurrentShift()" class="hidden bg-red-500 text-white p-2 rounded font-bold hover:bg-red-600 transition">
+                    Supprimer
+                </button>
+            </div>
+        </form>
+
+        <div class="bg-white p-4 rounded shadow mt-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-lg">Historique</h3>
+                <div class="flex space-x-2">
+                    <button onclick="changeMonth(-1)" class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm font-bold">&lt;</button>
+                    <span id="calendar-month-year" class="font-semibold text-sm capitalize">Mois Année</span>
+                    <button onclick="changeMonth(1)" class="px-2 py-1 bg-gray-200 rounded hover:bg-gray-300 text-sm font-bold">&gt;</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-7 gap-1 text-center font-bold text-xs text-gray-500 mb-2">
+                <div>Dim</div><div>Lun</div><div>Mar</div><div>Mer</div><div>Jeu</div><div>Ven</div><div>Sam</div>
+            </div>
+
+            <div id="calendar-grid" class="grid grid-cols-7 gap-1"></div>
+        </div>
+    </section>
+
+    <script src="app.js"></script>
+</body>
+</html>
