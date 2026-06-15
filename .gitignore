@@ -1,0 +1,14 @@
+# 🔒 SÉCURITÉ
+.env
+backend/.env
+frontend/.env
+
+# 🐍 PYTHON / CACHE
+backend/__pycache__/
+frontend/__pycache__/
+__pycache__/
+*.pyc
+
+# 💻 SYSTÈME
+.DS_Store
+Thumbs.db
